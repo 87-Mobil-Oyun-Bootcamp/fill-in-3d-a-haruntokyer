@@ -44,6 +44,7 @@ public class BlockController : MonoBehaviour
 
     public System.Action<BlockController> OnCreated { get; set; }
     public System.Action<BlockController> OnFilled { get; set; }
+    
 
     BlockState blockState = BlockState.Default;
 
@@ -56,5 +57,6 @@ public class BlockController : MonoBehaviour
     {
         OnCreated += LevelManager.Instance.OnBlockCreated;
         OnFilled += LevelManager.Instance.OnBlockFilled;
+       
     }
 }

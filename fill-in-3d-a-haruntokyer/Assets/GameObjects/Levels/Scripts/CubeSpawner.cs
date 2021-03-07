@@ -8,7 +8,6 @@ public class CubeSpawner : MonoBehaviour
     GameObject cube;
 
     float a;
-    
     float z;
     Vector3 cubePos = Vector3.zero;
 
@@ -19,9 +18,9 @@ public class CubeSpawner : MonoBehaviour
         for (int x = 0; x < block.blockCount; x++)
         {
 
-            a = Random.Range(-5f, 5f);
+            a = Random.Range(-3f, 3f);
             
-            z = Random.Range(-1f, -7f);
+            z = Random.Range(-1f, -4f);
             cubePos = new Vector3(
                    a,
                    .3f * .5f,
@@ -34,11 +33,8 @@ public class CubeSpawner : MonoBehaviour
             cubeObje.transform.localScale = Vector3.one * .3f;
 
             Cubes.Add(cubeObje);
-
-
-
-
         }
+        Debug.Log("küp sayısı " +Cubes.Count);
         return Cubes;
     }
 

@@ -42,7 +42,8 @@ public class BlockSpawner : MonoBehaviour
             }
         }
         blockCount = createdCubes.Count;
-        
+        Debug.Log("blok sayısı:"+blockCount);
         return createdCubes;
     }
+    
 }

@@ -7,6 +7,9 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance => instance;
 
     public System.Action LevelCompleted;
+    public System.Action ProgressBarUpdate;
+    public System.Action ProgressBarTotal;
+
 
     [Space]
     [SerializeField]
@@ -32,8 +35,11 @@ public class LevelManager : MonoBehaviour
 
     CubeSpawner cubeSpawner = new CubeSpawner();
 
+ 
+
     GroundSpawner groundSpawner = new GroundSpawner();
 
+ 
     List<BlockController> createdBlocks = new List<BlockController>();
     List<BlockController> filledBlocks = new List<BlockController>();
 
@@ -46,12 +52,13 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            
         }
 
         blockSpawner = GetComponent<BlockSpawner>();
         cubeSpawner = GetComponent<CubeSpawner>();
         groundSpawner = GetComponent<GroundSpawner>();
+        
     }
 
     public bool HandleCreateNextLevel()
@@ -61,6 +68,8 @@ public class LevelManager : MonoBehaviour
             for (int i = 0; i < createdBlocks.Count; i++)
             {
                 Destroy(createdBlocks[i]);
+                Debug.Log("siliyom");
+
             }
         }
 
@@ -68,6 +77,7 @@ public class LevelManager : MonoBehaviour
 
         if (levelInfoAsset.levelInfos.Count >= currentLevelIndex)
         {
+            
             CreateNextLevel();
             return true;
         }
@@ -77,26 +87,41 @@ public class LevelManager : MonoBehaviour
 
     void CreateNextLevel()
     {
+       
+        
+        
+
         blockSpawner.CreateBlockFromImage(levelInfoAsset.levelInfos[currentLevelIndex - 1], blockContainer);
         cubeSpawner.CreatBaseCube(blockSpawner, cubeContainer);
         groundSpawner.CreateGroundFromImage(levelInfoAsset.levelInfos[currentLevelIndex - 1], groundContainer);
         
     }
 
+    
     public void OnBlockCreated(BlockController blockController)
     {
         createdBlocks.Add(blockController);
-        Debug.Log("Collected Block Count " + filledBlocks.Count);
+        ProgressBarTotal?.Invoke();
+
+        Debug.Log("Created Block Count " + createdBlocks.Count);
     }
 
     public void OnBlockFilled(BlockController blockController)
     {
         filledBlocks.Add(blockController);
+        ProgressBarUpdate?.Invoke();
+
+
         Debug.Log($"{filledBlocks.Count} / {createdBlocks.Count} <- Collected Block Count");
 
         if (filledBlocks.Count == createdBlocks.Count)
         {
+            
             LevelCompleted?.Invoke();
+            
+            
         }
     }
+    
+
 }

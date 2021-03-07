@@ -7,6 +7,9 @@ MonoImporter:
   - levelInfoAsset: {fileID: 11400000, guid: c834a23eef893425cb48abc6ca039e61, type: 2}
   - blockContainer: {fileID: 1723130852236688072, guid: 515f8eec53dfb4134847f36be359befb,
       type: 3}
+  - cubeContainer: {fileID: 1723130852236688072, guid: 9b11cc91b1106af498f414dee0d1d278,
+      type: 3}
+  - groundContainer: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

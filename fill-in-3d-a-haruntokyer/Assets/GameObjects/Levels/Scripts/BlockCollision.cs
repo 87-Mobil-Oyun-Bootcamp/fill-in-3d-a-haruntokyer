@@ -5,22 +5,21 @@ using UnityEngine;
 public class BlockCollision : MonoBehaviour
 
 {
-    [Space]
-    [SerializeField]
-    private MeshRenderer blockMeshRenderer;
-
+    
 
 
     private void OnCollisionEnter(Collision collision)
     {   
 
 
-        if (collision.collider.tag == "Cube")
+        if (collision.collider.tag == "Cube" && GetComponent<BoxCollider>().enabled)
         {
-            Debug.Log("hit cube");
-            blockMeshRenderer.enabled = true;
-            Destroy(collision.gameObject);
             GetComponent<BoxCollider>().enabled = false;
+            Destroy(collision.gameObject);
+            Debug.Log("hit cube");
+            GetComponent<MeshRenderer>().enabled = true;
+            
+            
             if (gameObject)
             {
                 gameObject.layer = LayerMask.NameToLayer("FilledBlock");
@@ -28,7 +27,7 @@ public class BlockCollision : MonoBehaviour
 
             var blockController = GetComponent<BlockController>();
 
-            if (blockController) ;
+            if (blockController)
             {
                 blockController.BlockState = BlockState.Filled;
             }
